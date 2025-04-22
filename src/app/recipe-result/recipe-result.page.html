@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recipe Result</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--recipe result page -->
+  <!--only if recipe data exists -->
+  <ion-card *ngIf="recipe">
+    <img [src]="recipe.strMealThumb" alt="Recipe Image" />
+    <ion-card-header>
+      <!-- Title of the recipe -->
+      <ion-card-title>{{ recipe.strMeal }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <!-- Message if no recipe found -->
+  <p *ngIf="!recipe">No recipe found. Please go back and try again.</p>
+</ion-content>

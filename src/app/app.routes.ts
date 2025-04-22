@@ -1,13 +1,8 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'; // import route
+import { HomePage } from './home/home.page'; // import of home page
+import { RecipeResultPage } from './recipe-result/recipe-result.page'; // import of recipe-result page
 
-export const routes: Routes = [
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
+export const appRoutes: Routes = [  
+  { path: '', component: HomePage }, // setting up default path
+  { path: 'recipe-result', component: RecipeResultPage }, // setting up path to recipe-result
 ];
