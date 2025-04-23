@@ -8,7 +8,15 @@ import { Observable } from 'rxjs';
 export class RecipeService {
   constructor(private http: HttpClient) {}
 
-  getRecipe(ingredient: string): Observable<any> {
+  // This function searches for meals by ingredient
+  // I'm using the filter API endpoint since we just need the basic info first
+  getRecipesByIngredient(ingredient: string): Observable<any> {
     return this.http.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+  }
+
+  // After finding a recipe, we need the full details
+  // The lookup endpoint gives us ingredients, instructions, etc.
+  getRecipeDetailsById(id: string): Observable<any> {
+    return this.http.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
   }
 }

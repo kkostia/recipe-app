@@ -1,19 +1,48 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Recipe Result</ion-title>
+    <!-- Back button -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recipe Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!--recipe result page -->
-  <!--only if recipe data exists -->
-  <ion-card *ngIf="recipe">
-    <img [src]="recipe.strMealThumb" alt="Recipe Image" />
+  <!-- Shows while API loads data(just a design choice) -->
+  <div *ngIf="loading" class="ion-padding ion-text-center">
+    <ion-spinner></ion-spinner>
+    <p>Loading recipe...</p>
+  </div>
+
+  <!-- Main recipe card -->
+  <ion-card *ngIf="!loading && recipe">
+    <!-- Food image -->
+    <img [src]="recipe.strMealThumb" alt="Meal Image" />
+    
+    <!-- Dish name and type -->
     <ion-card-header>
-      <!-- Title of the recipe -->
       <ion-card-title>{{ recipe.strMeal }}</ion-card-title>
+      <ion-card-subtitle>{{ recipe.strCategory }} | {{ recipe.strArea }}</ion-card-subtitle>
     </ion-card-header>
+
+    <ion-card-content>
+      <!-- What you'll need -->
+      <h2>Ingredients</h2>
+      <ion-list>
+        <ion-item *ngFor="let item of ingredients">
+          <ion-label>{{ item }}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <!-- How to make it -->
+      <h2>Instructions</h2>
+      <p>{{ recipe.strInstructions }}</p>
+    </ion-card-content>
   </ion-card>
-  <!-- Message if no recipe found -->
-  <p *ngIf="!recipe">No recipe found. Please go back and try again.</p>
+
+  <!-- Message if nothing found -->
+  <div *ngIf="!loading && !recipe" class="ion-padding ion-text-center">
+    <p>No recipe details found. Please try another ingredient.</p>
+  </div>
 </ion-content>
