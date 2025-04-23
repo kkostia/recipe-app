@@ -25,3 +25,34 @@
 #container a {
   text-decoration: none;
 }
+
+/* Quick style tweaks for the search page */
+
+/* Container for the input and button */
+.search-container {
+  padding: 16px;
+  background: white;
+}
+
+/* Made the heading a bit nicer */
+h1 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Just a bit of text to help users */
+.help-text {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+/* Find recipe button - giving it some pop */
+.find-button {
+  margin-top: 16px;
+  --background: #ff6b6b;
+  --color: white;
+  font-weight: 600;
+}

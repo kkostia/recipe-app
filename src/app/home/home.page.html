@@ -5,11 +5,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label position="floating">Main Ingredient</ion-label>
-    <ion-input [(ngModel)]="ingredient"></ion-input> 
-  </ion-item>
-  <!--this button will trigger findRecipe() function and use 
-  data from "ingridient" input-->
-  <ion-button expand="block" (click)="findRecipe()">Find Recipe</ion-button>
+  <div class="search-container">
+    <h1>Find Delicious Recipes</h1>
+    <p class="help-text">Enter an ingredient you have and we'll find recipes for you</p>
+    
+    <ion-item lines="none">
+      <ion-input label="Main Ingredient" labelPlacement="floating" [(ngModel)]="ingredient" placeholder="Try chicken, beef, or tomatoes"></ion-input>
+    </ion-item>
+    
+    <ion-button expand="block" class="find-button" (click)="findRecipe()">
+      <ion-icon slot="start" name="search-outline"></ion-icon>
+      Find Recipe
+    </ion-button>
+  </div>
 </ion-content>

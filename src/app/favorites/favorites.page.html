@@ -1,32 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>My Favorite Recipes</ion-title>
+    <ion-title>My Favorites</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- Empty state - show this when no favorites -->
-  <div *ngIf="favorites.length === 0" class="ion-padding ion-text-center">
-    <ion-icon name="heart-outline" size="large" color="medium"></ion-icon>
-    <p>You haven't saved any favorite recipes yet.</p>
-    <ion-button (click)="goToHomePage()">Find Some Recipes</ion-button>
+  <!-- No favorites yet state -->
+  <div *ngIf="favorites.length === 0" class="empty-favorites">
+    <ion-icon name="heart-outline" class="empty-icon"></ion-icon>
+    <p class="empty-message">You haven't saved any favorite recipes yet.</p>
+    <ion-button (click)="goToHomePage()" color="primary">
+      <ion-icon name="search" slot="start"></ion-icon>
+      Find Some Recipes
+    </ion-button>
   </div>
   
-  <!-- List of all saved recipes -->
+  <!-- List of saved favorites -->
   <ion-list *ngIf="favorites.length > 0">
-    <!-- Each favorite is clickable to open the full recipe -->
+    <ion-list-header>
+      <ion-label>Your Saved Recipes</ion-label>
+    </ion-list-header>
+    
     <ion-item *ngFor="let recipe of favorites" (click)="openRecipe(recipe.idMeal)">
       <ion-thumbnail slot="start">
         <img [src]="recipe.strMealThumb" alt="Recipe Image"/>
       </ion-thumbnail>
       <ion-label>
         <h2>{{ recipe.strMeal }}</h2>
-        <p>Added on {{ formatDate(recipe.dateAdded) }}</p>
+        <p class="date-added">Saved on {{ formatDate(recipe.dateAdded) }}</p>
       </ion-label>
-      <!-- Swipe from right or click trash to remove -->
       <ion-buttons slot="end">
-        <ion-button (click)="removeFromFavorites($event, recipe.idMeal)" fill="clear">
-          <ion-icon slot="icon-only" name="trash-outline" color="danger"></ion-icon>
+        <ion-button (click)="removeFromFavorites($event, recipe.idMeal)" fill="clear" color="danger">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-item>
