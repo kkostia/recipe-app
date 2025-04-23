@@ -1,3 +1,21 @@
 <ion-app>
+  <!-- Main content area -->
   <ion-router-outlet></ion-router-outlet>
+  
+  <!-- Bottom tab bar - added after I learned how to use tabs -->
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <!-- Home tab -->
+      <ion-tab-button tab="home" [routerLink]="['/']" routerDirection="root">
+        <ion-icon name="search-outline"></ion-icon>
+        <ion-label>Search</ion-label>
+      </ion-tab-button>
+      
+      <!-- Favorites tab -->
+      <ion-tab-button tab="favorites" [routerLink]="['/favorites']" routerDirection="root">
+        <ion-icon name="heart-outline"></ion-icon>
+        <ion-label>Favorites</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-app>

@@ -5,6 +5,17 @@
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>Recipe Details</ion-title>
+    
+    <!-- Add heart icon for favorites -->
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleFavorite()" *ngIf="recipe">
+        <!-- Change icon based on favorite status -->
+        <ion-icon slot="icon-only" 
+                 [name]="isFavorite() ? 'heart' : 'heart-outline'"
+                 [color]="isFavorite() ? 'danger' : ''">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -44,6 +55,11 @@
       <ion-button expand="block" (click)="showAnotherRecipe()" 
                   [disabled]="loading || allRecipeIds.length <= 1">
         Try Another {{ currentIngredient }} Recipe
+      </ion-button>
+      
+      <!-- Another way to save to favorites -->
+      <ion-button expand="block" (click)="toggleFavorite()" fill="outline" color="danger">
+        {{ isFavorite() ? 'Remove from Favorites' : 'Save to Favorites' }}
       </ion-button>
     </ion-card-content>
   </ion-card>

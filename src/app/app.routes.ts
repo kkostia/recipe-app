@@ -5,4 +5,5 @@ import { RecipeResultPage } from './recipe-result/recipe-result.page'; // import
 export const appRoutes: Routes = [  
   { path: '', component: HomePage }, // setting up default path
   { path: 'recipe-result', component: RecipeResultPage }, // setting up path to recipe-result
+  { path: 'favorites', loadComponent: () => import('./favorites/favorites.page').then(m => m.FavoritesPage) }, // lazy-loaded favorites page
 ];

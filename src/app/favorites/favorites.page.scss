@@ -1,0 +1,26 @@
+// Simple styles for the favorites page
+
+// Center the empty state content
+.ion-padding.ion-text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+// Make the heart icon a bit bigger
+ion-icon[name="heart-outline"] {
+  font-size: 64px; 
+  margin-bottom: 16px;
+}
+
+// Add some hover effects
+ion-item {
+  --transition: background-color 0.3s;
+  
+  &:hover {
+    --background: rgba(var(--ion-color-primary-rgb), 0.1);
+    cursor: pointer;
+  }
+} 
