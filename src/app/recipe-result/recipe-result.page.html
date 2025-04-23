@@ -38,6 +38,13 @@
       <!-- How to make it -->
       <h2>Instructions</h2>
       <p>{{ recipe.strInstructions }}</p>
+      
+      <!-- Added this button to see other recipes with the same ingredient -->
+      <!-- Got tired of hitting back and searching again! -->
+      <ion-button expand="block" (click)="showAnotherRecipe()" 
+                  [disabled]="loading || allRecipeIds.length <= 1">
+        Try Another {{ currentIngredient }} Recipe
+      </ion-button>
     </ion-card-content>
   </ion-card>
 

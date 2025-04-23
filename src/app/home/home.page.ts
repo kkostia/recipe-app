@@ -27,7 +27,13 @@ export class HomePage {
         const mealId = res.meals[0].idMeal;
         
         // Go to the details page and send the ID along
-        this.router.navigate(['/recipe-result'], { queryParams: { mealId: mealId } });
+        // Also sending the ingredient name so we can get more recipes later
+        this.router.navigate(['/recipe-result'], { 
+          queryParams: { 
+            mealId: mealId,
+            ingredient: this.ingredient
+          } 
+        });
       } else {
         // Let the user know if we couldn't find anything
         alert('No recipes found for this ingredient. Please try another ingredient.');

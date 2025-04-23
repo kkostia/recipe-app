@@ -19,4 +19,11 @@ export class RecipeService {
   getRecipeDetailsById(id: string): Observable<any> {
     return this.http.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
   }
+  
+  // Got this working finally - needed for the "another recipe" feature
+  // Returns a random recipe based on the same ingredient
+  getRandomRecipeForIngredient(ingredient: string, currentId: string): Observable<any> {
+    // Same endpoint as before, but we'll handle the random selection in the component
+    return this.http.get(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+  }
 }
