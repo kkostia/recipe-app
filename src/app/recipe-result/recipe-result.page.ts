@@ -135,15 +135,15 @@ export class RecipeResultPage {
   }
   
   // Toggles favorite status
-  toggleFavorite() {
+  async toggleFavorite() {
     if (!this.recipe) return;
     
     // If it's already a favorite, remove it
     if (this.isFavorite()) {
-      this.recipeService.removeFromFavorites(this.recipe.idMeal);
+      await this.recipeService.removeFromFavorites(this.recipe.idMeal);
     } else {
       // Otherwise add it to favorites
-      this.recipeService.addToFavorites(this.recipe);
+      await this.recipeService.addToFavorites(this.recipe);
     }
   }
   

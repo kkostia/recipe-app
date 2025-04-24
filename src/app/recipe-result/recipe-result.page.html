@@ -57,6 +57,15 @@
       
       <!-- Action buttons -->
       <div class="action-buttons">
+        <!-- Favorite button -->
+        <ion-button 
+          expand="block" 
+          (click)="toggleFavorite()" 
+          [color]="isFavorite() ? 'danger' : 'primary'">
+          <ion-icon [name]="isFavorite() ? 'heart' : 'heart-outline'" slot="start"></ion-icon>
+          {{ isFavorite() ? 'Remove from Favorites' : 'Add to Favorites' }}
+        </ion-button>
+        
         <!-- Another recipe button -->
         <ion-button 
           expand="block" 

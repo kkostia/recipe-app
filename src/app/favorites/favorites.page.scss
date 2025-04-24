@@ -2,49 +2,149 @@
 
 /* Made some style tweaks to favorites */
 
+/* Enhanced Favorites Page Styling */
+
+/* Page container */
+ion-content {
+  --background: #f8f9fa;
+}
+
+/* List header styling */
+ion-list-header {
+  padding-top: 16px;
+  padding-bottom: 8px;
+  
+  ion-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: -0.3px;
+  }
+}
+
 /* Empty state styling - when no favorites yet */
 .empty-favorites {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  height: 80vh;
   padding: 24px;
   text-align: center;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
 }
 
 /* Big heart icon in the empty state */
 .empty-icon {
-  font-size: 64px;
-  margin-bottom: 16px;
-  color: #ccc;
+  font-size: 80px;
+  margin-bottom: 24px;
+  color: #ddd;
+  opacity: 0.8;
 }
 
 /* Message text */
 .empty-message {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   color: #666;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+/* Find recipes button on empty state */
+.empty-favorites ion-button {
+  --background: #4d7bf3;
+  --background-hover: #3a66e0;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 14px rgba(77, 123, 243, 0.2);
+  height: 48px;
+  font-weight: 600;
 }
 
 /* Each favorite recipe in the list */
 ion-item {
-  --transition: background-color 0.2s;
+  --padding-start: 16px;
+  --padding-end: 8px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --border-color: #eee;
+  --inner-border-width: 0;
+  margin-bottom: 2px;
+  --transition: background-color 0.2s, transform 0.2s;
+  border-radius: 8px;
+  margin: 8px 16px;
+  --background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   
   &:hover {
-    --background: rgba(0, 0, 0, 0.05);
+    --background: rgba(0, 0, 0, 0.02);
     cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   }
+}
+
+/* Recipe thumbnail styling */
+ion-thumbnail {
+  --border-radius: 8px;
+  --size: 70px;
+  margin-right: 16px;
+  
+  img {
+    object-fit: cover;
+    border-radius: 8px;
+  }
+}
+
+/* Recipe name in the list */
+ion-item h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 /* Date added label */
 .date-added {
-  font-size: 12px;
+  font-size: 13px;
   color: #888;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
-/* Make the trash button more visible */
+/* Delete button styling */
+ion-buttons[slot="end"] {
+  margin-right: 8px;
+}
+
 ion-button[color="danger"] {
   --color: #ff3b30;
+  --background-hover: rgba(255, 59, 48, 0.08);
+  --border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  
+  ion-icon {
+    font-size: 18px;
+  }
+}
+
+/* List animations */
+ion-list ion-item {
+  animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 } 

@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-  // Using local storage to save favorites between sessions
-  // Was going to use a database but this is much simpler for now
+  // Using Ionic Storage to save favorites between sessions
   private favoriteRecipes: any[] = [];
+  private storageReady = false;
   
-  constructor(private http: HttpClient) {
-    // Load saved favorites when the app starts
-    this.loadFavorites();
+  constructor(private http: HttpClient, private storage: Storage) {
+    // Initialize storage and load saved favorites when the app starts
+    this.initStorage();
+  }
+
+  // Initialize the storage
+  async initStorage() {
+    await this.storage.create();
+    this.storageReady = true;
+    await this.loadFavorites();
   }
 
   // This function searches for meals by ingredient
@@ -29,27 +37,30 @@ export class RecipeService {
   
   // Favorites functionality
   
-  // Load favorites from local storage
-  private loadFavorites() {
-    const saved = localStorage.getItem('favoriteRecipes');
+  // Load favorites from storage
+  private async loadFavorites() {
+    if (!this.storageReady) await this.initStorage();
+    
+    const saved = await this.storage.get('favoriteRecipes');
     // Had an error before when there were no saved recipes
     if (saved) {
       try {
-        this.favoriteRecipes = JSON.parse(saved);
+        this.favoriteRecipes = saved;
       } catch(e) {
-        // If parsing fails, just start with empty array
+        // If there's an error, just start with empty array
         this.favoriteRecipes = [];
       }
     }
   }
   
-  // Save favorites to local storage
-  private saveFavorites() {
-    localStorage.setItem('favoriteRecipes', JSON.stringify(this.favoriteRecipes));
+  // Save favorites to storage
+  private async saveFavorites() {
+    if (!this.storageReady) await this.initStorage();
+    await this.storage.set('favoriteRecipes', this.favoriteRecipes);
   }
   
   // Add a recipe to favorites
-  addToFavorites(recipe: any) {
+  async addToFavorites(recipe: any) {
     // Make sure we don't add duplicates
     if (!this.isFavorite(recipe.idMeal)) {
       // Just saving the fields we need to show in favorites list
@@ -60,14 +71,14 @@ export class RecipeService {
         dateAdded: new Date().toISOString() // Might use this later to sort by newest
       };
       this.favoriteRecipes.push(favoriteRecipe);
-      this.saveFavorites();
+      await this.saveFavorites();
     }
   }
   
   // Remove a recipe from favorites
-  removeFromFavorites(recipeId: string) {
+  async removeFromFavorites(recipeId: string) {
     this.favoriteRecipes = this.favoriteRecipes.filter(recipe => recipe.idMeal !== recipeId);
-    this.saveFavorites();
+    await this.saveFavorites();
   }
   
   // Check if a recipe is in favorites

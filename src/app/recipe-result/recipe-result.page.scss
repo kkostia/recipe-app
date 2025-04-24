@@ -1,31 +1,100 @@
-/* Tweaked the recipe detail page a bit */
+/* Enhanced Recipe Detail Page Styling */
 
-/* Fix for the recipe image - show full image at smaller size */
-ion-card img {
-  max-height: 250px;
-  width: auto;
-  max-width: 100%;
-  margin: 0 auto;
-  display: block;
-  object-fit: contain;
+/* Recipe card styling with shadow and rounded corners */
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 16px;
 }
 
-/* Nice heading for sections */
+/* Recipe image with better presentation */
+ion-card img {
+  max-height: 280px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* Card header styling */
+ion-card-header {
+  padding: 16px 16px 8px;
+}
+
+/* Recipe title styling */
+ion-card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+/* Recipe subtitle (category and area) */
+ion-card-subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  text-transform: none;
+}
+
+/* Section heading styling */
 h2 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 18px;
+  margin-top: 28px;
+  margin-bottom: 14px;
+  font-size: 20px;
   font-weight: 600;
   color: #333;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 8px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background-color: #4d7bf3;
+  }
+}
+
+/* Ingredients list styling */
+ion-list {
+  background: transparent;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+ion-item {
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 6px;
+  
+  ion-icon {
+    color: #4d7bf3;
+    font-size: 20px;
+  }
+  
+  ion-label {
+    margin-left: 8px;
+    font-size: 16px;
+    color: #444;
+  }
 }
 
 /* Instructions text */
 p {
-  line-height: 1.6;
+  line-height: 1.8;
   color: #444;
   white-space: pre-line; /* Preserves the line breaks in API response */
+  font-size: 16px;
+  margin-bottom: 24px;
 }
 
 /* Loading spinner container */
@@ -34,24 +103,99 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 300px;
-}
-
-/* 'Try another' button styling */
-.another-recipe-btn {
-  margin-top: 24px;
-  --background: #4d7bf3;
+  height: 400px;
+  
+  ion-spinner {
+    width: 48px;
+    height: 48px;
+    color: #4d7bf3;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #666;
+  }
 }
 
 /* Action buttons container */
 .action-buttons {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 24px;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+/* 'Try another' button styling */
+.another-recipe-btn {
+  margin-top: 4px;
+  --background: #4d7bf3;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(77, 123, 243, 0.3);
+  font-weight: 600;
+  height: 48px;
+  
+  &:hover {
+    --background: #3a66e0;
+  }
 }
 
 /* Share button styling */
 ion-button[color="tertiary"] {
   --background: #50c8ff;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(80, 200, 255, 0.3);
+  font-weight: 600;
+  height: 48px;
+  
+  &:hover {
+    --background: #3ab5eb;
+  }
+}
+
+/* Favorite button styling */
+ion-button[color="primary"] {
+  --background: #4d7bf3;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(77, 123, 243, 0.3);
+  font-weight: 600;
+  height: 48px;
+  
+  &:hover {
+    --background: #3a66e0;
+  }
+}
+
+ion-button[color="danger"] {
+  --background: #ff6b6b;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+  font-weight: 600;
+  height: 48px;
+  
+  &:hover {
+    --background: #ff5252;
+  }
+}
+
+/* Error message styling */
+.ion-padding.ion-text-center {
+  padding: 32px;
+  
+  ion-icon {
+    font-size: 64px !important;
+    color: #ccc !important;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 24px;
+  }
+}
+
+/* Card content better spacing */
+ion-card-content {
+  padding: 16px 20px 24px;
 }

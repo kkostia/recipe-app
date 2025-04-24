@@ -34,8 +34,9 @@ export class FavoritesPage {
   }
   
   // Remove from favorites 
-  removeFromFavorites(event: Event, recipeId: string) {
-    this.recipeService.removeFromFavorites(recipeId);
+  async removeFromFavorites(event: Event, recipeId: string) {
+    event.stopPropagation(); // Prevent the click from bubbling to the item click handler
+    await this.recipeService.removeFromFavorites(recipeId);
   }
   
   goToHomePage() {
