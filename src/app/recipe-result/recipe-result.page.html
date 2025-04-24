@@ -15,6 +15,11 @@
                  [color]="isFavorite() ? 'danger' : ''">
         </ion-icon>
       </ion-button>
+      
+      <!-- Share button -->
+      <ion-button (click)="shareRecipe()" *ngIf="recipe">
+        <ion-icon slot="icon-only" name="share-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -50,15 +55,24 @@
       <h2>How to Make It</h2>
       <p>{{ recipe.strInstructions }}</p>
       
-      <!-- Another recipe button -->
-      <ion-button 
-        expand="block" 
-        class="another-recipe-btn"
-        (click)="showAnotherRecipe()" 
-        [disabled]="loading || allRecipeIds.length <= 1">
-        <ion-icon name="refresh-outline" slot="start"></ion-icon>
-        Try Another {{ currentIngredient }} Recipe
-      </ion-button>
+      <!-- Action buttons -->
+      <div class="action-buttons">
+        <!-- Another recipe button -->
+        <ion-button 
+          expand="block" 
+          class="another-recipe-btn"
+          (click)="showAnotherRecipe()" 
+          [disabled]="loading || allRecipeIds.length <= 1">
+          <ion-icon name="refresh-outline" slot="start"></ion-icon>
+          Try Another {{ currentIngredient }} Recipe
+        </ion-button>
+        
+        <!-- Share recipe button -->
+        <ion-button expand="block" (click)="shareRecipe()" color="tertiary">
+          <ion-icon name="share-social-outline" slot="start"></ion-icon>
+          Share This Recipe
+        </ion-button>
+      </div>
     </ion-card-content>
   </ion-card>
 

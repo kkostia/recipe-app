@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../recipe.service';
-import { IonicModule } from '@ionic/angular';  
+import { IonicModule, ToastController } from '@ionic/angular';  
 import { CommonModule } from '@angular/common'; 
+import { Share } from '@capacitor/share';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-recipe-result',
@@ -20,7 +22,11 @@ export class RecipeResultPage {
   allRecipeIds: string[] = []; // All recipe IDs for the ingredient
   usedRecipeIds: string[] = []; // Keeping track of recipes we've already shown
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) {
+  constructor(
+    private route: ActivatedRoute, 
+    private recipeService: RecipeService,
+    private toastController: ToastController
+  ) {
     // Grab the meal ID from the URL
     this.route.queryParams.subscribe(params => {
       const mealId = params['mealId'];
@@ -139,5 +145,45 @@ export class RecipeResultPage {
       // Otherwise add it to favorites
       this.recipeService.addToFavorites(this.recipe);
     }
+  }
+  
+  // Share recipe using Capacitor Share plugin
+  async shareRecipe() {
+    if (!this.recipe) return;
+    
+    // Format ingredients as a list
+    const ingredientsList = this.ingredients.map(item => `- ${item}`).join('\n');
+    
+    // Create shareable content
+    const shareText = `Check out this recipe for ${this.recipe.strMeal}!\n\n` +
+      `Ingredients:\n${ingredientsList}\n\n` +
+      `Instructions:\n${this.recipe.strInstructions}\n\n` +
+      `Shared from Recipe Finder App`;
+    
+    await Share.share({
+      title: `Recipe: ${this.recipe.strMeal}`,
+      text: shareText,
+      dialogTitle: 'Share this recipe'
+    });
+    
+    this.showSuccess('Recipe shared successfully!');
+  }
+  
+  // Show a success message to the user
+  async showSuccess(message: string) {
+    const successMessage = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+      color: 'dark',
+      buttons: [
+        {
+          text: 'OK',
+          role: 'cancel'
+        }
+      ]
+    });
+    
+    await successMessage.present();
   }
 }

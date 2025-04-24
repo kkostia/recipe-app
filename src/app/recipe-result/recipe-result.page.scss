@@ -42,3 +42,16 @@ p {
   margin-top: 24px;
   --background: #4d7bf3;
 }
+
+/* Action buttons container */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Share button styling */
+ion-button[color="tertiary"] {
+  --background: #50c8ff;
+}
